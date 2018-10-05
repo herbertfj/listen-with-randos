@@ -1,7 +1,5 @@
 package listenwithrandos.app
 
-import kotlinx.html.classes
-import kotlinx.html.js.onClickFunction
 import listenwithrandos.common.fetch
 import listenwithrandos.state.AppAction
 import listenwithrandos.state.KeepTokenAction
@@ -10,18 +8,21 @@ import org.w3c.fetch.Headers
 import org.w3c.fetch.RequestInit
 import org.w3c.fetch.RequestMode
 import react.*
-import react.dom.button
 import react.dom.div
 import react.redux.rConnect
+import react.router.dom.RouteResultHistory
 import react.router.dom.RouteResultProps
 import redux.WrapperAction
 
 class ReceiveToken : RComponent<RouteResultProps<RProps>, RState>() {
     override fun RBuilder.render() {
-        div {
-            connectedKeepToken {
-                attrs {
-                    token = qs.parse(props.location.hash.substringAfter('#')).access_token as String
+        connectedKeepToken {
+            attrs {
+                token = qs.parse(props.location.hash.substringAfter('#')).access_token as String
+                redirect = lambda@{
+                    val history: dynamic = props.history
+                    history.replace("/")
+                    return@lambda
                 }
             }
         }
@@ -30,6 +31,7 @@ class ReceiveToken : RComponent<RouteResultProps<RProps>, RState>() {
 
 interface KeepTokenOwnProps : RProps {
     var token: String
+    var redirect: () -> Unit
 }
 
 interface KeepTokenDispatchProps : RProps {
@@ -61,23 +63,12 @@ fun getProfile(token: String) {
 }
 
 class KeepToken : RComponent<KeepTokenProps, RState>() {
-    override fun RBuilder.render() {
-        button {
-            attrs {
-                classes = setOf("btn", "btn-primary")
-                onClickFunction = {
-                    props.keep(props.token)
-                }
-            }
-            +"Click me pls"
-        }
+    override fun componentDidMount() {
+        props.keep(props.token)
+        props.redirect()
+    }
 
-        button {
-            attrs {
-                onClickFunction = { getProfile(props.token) }
-            }
-            +"Get my profile!"
-        }
+    override fun RBuilder.render() {
     }
 }
 

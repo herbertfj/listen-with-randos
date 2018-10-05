@@ -1,5 +1,6 @@
 package listenwithrandos.common
 
+import listenwithrandos.domain.common.DataClasser
 import org.w3c.fetch.*
 import kotlin.browser.window
 import kotlin.js.Promise
@@ -7,7 +8,7 @@ import kotlin.js.Promise
 data class FetchException(val method: String, val status: Short) :
     Exception(message = "$method failed with status: $status")
 
-fun <T> fetch(url: String, init: RequestInit? = null): Promise<T> {
+fun <T> fetch(url: String, init: RequestInit? = null, classer: DataClasser<T>? = null): Promise<T> {
     val requestInit = RequestInit(
         method = init?.method ?: "GET",
         mode = init?.mode ?: RequestMode.SAME_ORIGIN,
@@ -25,5 +26,5 @@ fun <T> fetch(url: String, init: RequestInit? = null): Promise<T> {
             else throw FetchException(requestInit.method ?: "Request", it.status)
         }
         .then { it.json() }
-        .then { it.unsafeCast<T>() }
+        .then { classer?.invoke(it) ?: it.unsafeCast<T>() }
 }
