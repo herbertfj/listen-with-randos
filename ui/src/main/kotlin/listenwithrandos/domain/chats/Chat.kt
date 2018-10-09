@@ -1,6 +1,5 @@
 package listenwithrandos.domain.chats
 
-import kotlinext.js.js
 import listenwithrandos.domain.common.DataClasser
 import listenwithrandos.domain.common.DataUnclasser
 import kotlin.js.Date
@@ -12,24 +11,20 @@ data class Chat(
     val time: Date
 )
 
-class ChatClasser: DataClasser<Chat> {
-    override operator fun invoke(dynamic: dynamic): Chat {
-        return Chat(
-            id = dynamic.id as String?,
-            userId = dynamic.userId as String,
-            message = dynamic.message as String,
-            time = Date(dynamic.time as String)
-        )
-    }
+val chatClasser: DataClasser<Chat> = {
+    Chat(
+        id = it.id as String?,
+        userId = it.userId as String,
+        message = it.message as String,
+        time = Date(it.time as String)
+    )
 }
 
-class ChatUnclasser: DataUnclasser<Chat> {
-    override operator fun invoke(data: Chat): dynamic {
-        return js {
-            this["id"] = id
-            this["userId"] = userId
-            this["message"] = message
-            this["time"] = time
-        }
+val chatUnclasser: DataUnclasser<Chat> = {
+    kotlinext.js.js {
+        this["id"] = it.id
+        this["userId"] = it.userId
+        this["message"] = it.message
+        this["time"] = it.time
     }
 }
