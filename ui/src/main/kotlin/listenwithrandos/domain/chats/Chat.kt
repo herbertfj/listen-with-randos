@@ -1,9 +1,12 @@
 package listenwithrandos.domain.chats
 
+import kotlinext.js.js
+import kotlinx.serialization.Serializable
 import listenwithrandos.domain.common.DataClasser
 import listenwithrandos.domain.common.DataUnclasser
 import kotlin.js.Date
 
+@Serializable
 data class Chat(
     val id: String? = null,
     val userId: String,
@@ -21,7 +24,7 @@ val chatClasser: DataClasser<Chat> = {
 }
 
 val chatUnclasser: DataUnclasser<Chat> = {
-    kotlinext.js.js {
+    js {
         this["id"] = it.id
         this["userId"] = it.userId
         this["message"] = it.message

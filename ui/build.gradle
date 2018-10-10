@@ -15,6 +15,7 @@ buildscript {
 }
 
 apply plugin: 'kotlin2js'
+apply plugin: 'kotlinx-serialization'
 apply plugin: 'org.jetbrains.kotlin.frontend'
 
 group = 'io.github.herbertfj.listenwithrandos'

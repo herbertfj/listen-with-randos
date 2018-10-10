@@ -4,12 +4,10 @@ typealias DataClasser<T> = (dynamic: dynamic) -> T
 
 typealias DataUnclasser<T> = (data: T) -> dynamic
 
-fun <T> arrayClasser(classer: DataClasser<T>): DataClasser<Array<T>> {
+fun <T> listClasser(classer: DataClasser<T>): DataClasser<List<T>> {
     return { data ->
-        var classed = arrayOf<T>()
-        (data as Array<dynamic>).forEach {
-            classed += classer(it)
+        (data as Array<dynamic>).map {
+            classer(it)
         }
-        classed
     }
 }

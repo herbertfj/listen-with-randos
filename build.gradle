@@ -3,10 +3,12 @@ allprojects {
         ext {
             kotlinVersion = '1.2.70'
             springBootVersion = '2.0.5.RELEASE'
+            serializationVersion = '0.6.2'
         }
 
         repositories {
             mavenCentral()
+            maven { url "https://kotlin.bintray.com/kotlinx" }
         }
 
         dependencies {
@@ -14,6 +16,7 @@ allprojects {
             classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
             classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
             classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+            classpath("org.jetbrains.kotlinx:kotlinx-gradle-serialization-plugin:${serializationVersion}")
         }
     }
 

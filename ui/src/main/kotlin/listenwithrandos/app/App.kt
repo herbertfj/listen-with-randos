@@ -12,7 +12,7 @@ fun RBuilder.app() {
             route("/", exact = true) {
                 connectedLoginSwitch {
                     attrs {
-                        loggedInRender = { child(ChatWindow::class) {} }
+                        loggedInRender = { connectedChatWindow {} }
                         loggedOutRender = {}
                     }
                 }

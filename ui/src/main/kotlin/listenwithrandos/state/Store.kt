@@ -1,11 +1,19 @@
 package listenwithrandos.state
 
 import kotlinext.js.js
-import redux.*
+import kotlinx.serialization.json.JSON
+import redux.RAction
+import redux.Store
+import redux.WrapperAction
+import redux.rEnhancer
 import kotlin.browser.window
 
 fun createStore(): Store<State, RAction, WrapperAction> {
-    val storedState = window.localStorage.getItem("state")?.let { JSON.parse<State>(it) }
+    val storedState = window.localStorage.getItem("state")?.let {
+        val state = JSON.parse<State>(it)
+        console.log(state)
+        state
+    }
 
     val preloadedState = storedState ?: js {}
 
@@ -16,7 +24,9 @@ fun createStore(): Store<State, RAction, WrapperAction> {
     )
 
     store.subscribe {
-        val state = JSON.stringify(store.getState() as Any)
+        console.log(store.getState())
+        val state = JSON.stringify(store.getState().unsafeCast<State>())
+        println(state)
         window.localStorage.setItem("state", state)
     }
 
