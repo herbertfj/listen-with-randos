@@ -1,12 +1,15 @@
 // @flow
 
+export const KEEP_TOKEN: 'KEEP_TOKEN' = 'KEEP_TOKEN'
+export const LOGOUT: 'LOGOUT' = 'LOGOUT'
+
 export type KeepTokenAction = {
-  type: 'KEEP_TOKEN_ACTION',
+  type: typeof KEEP_TOKEN,
   token: string
 }
 
 export type LogoutAction = {
-  type: 'LOGOUT_ACTION'
+  type: typeof LOGOUT
 }
 
 export type AppAction

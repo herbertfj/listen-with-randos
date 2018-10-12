@@ -4,29 +4,33 @@ import type {State} from '../../domain/store/state'
 import {connect} from 'react-redux'
 import * as React from 'react'
 
-interface SwitchBaseStateProps {
-  render: boolean
+type SwitchBaseOwnProps = {
+  children?: React.Node
 }
 
-class SwitchBase extends React.Component<SwitchBaseStateProps> {
-  render() {
-    if (this.props.render) {
-      return this.props.children
-    }
-    return null
-  }
+type SwitchBaseStateProps = {
+  render: boolean,
+}
+
+type SwitchBaseProps = SwitchBaseOwnProps & SwitchBaseStateProps
+
+const SwitchBase: React.StatelessFunctionalComponent<SwitchBaseProps> = (props: SwitchBaseProps) => {
+  return props.render ? props.children || null : null
 }
 
 const isLoggedIn = (state: State): boolean => !!state.accessToken
 
+const mapStateToProps = (state: State) => ({
+  render: isLoggedIn(state)
+})
+
 export const LoggedInRender = connect({
-  mapStateToProps: (state) => ({
-    render: isLoggedIn(state),
-  }),
+  mapStateToProps,
+  mapDispatchToProps: null,
 })(SwitchBase)
 
 export const LoggedOutRender = connect({
-  mapStateToProps: (state) => ({
+  mapStateToProps: (state: State) => ({
     render: !isLoggedIn(state),
   }),
-})
+})(SwitchBase)
