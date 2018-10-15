@@ -12,6 +12,8 @@ export type LogoutAction = {
   type: typeof LOGOUT
 }
 
-export type AppAction
-  = KeepTokenAction
+export type AppAction =
+  | KeepTokenAction
   | LogoutAction
+
+export type Dispatch = (action: AppAction) => AppAction

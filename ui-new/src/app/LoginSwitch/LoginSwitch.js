@@ -1,8 +1,8 @@
 // @flow
 
-import type {State} from '../../domain/store/state'
 import {connect} from 'react-redux'
 import * as React from 'react'
+import type {State} from '../../domain/store/reducer/reducer'
 
 type SwitchBaseOwnProps = {
   children?: React.Node
@@ -20,17 +20,18 @@ const SwitchBase: React.StatelessFunctionalComponent<SwitchBaseProps> = (props: 
 
 const isLoggedIn = (state: State): boolean => !!state.accessToken
 
-const mapStateToProps = (state: State) => ({
-  render: isLoggedIn(state)
+const loggedInMapStateToProps = (state: State) => ({
+  render: isLoggedIn(state),
 })
 
-export const LoggedInRender = connect({
-  mapStateToProps,
-  mapDispatchToProps: null,
-})(SwitchBase)
+const loggedOutMapStateToProps = (state: State) => ({
+  render: !isLoggedIn(state),
+})
 
-export const LoggedOutRender = connect({
-  mapStateToProps: (state: State) => ({
-    render: !isLoggedIn(state),
-  }),
-})(SwitchBase)
+export const LoggedInRender = connect(
+  loggedInMapStateToProps,
+)(SwitchBase)
+
+export const LoggedOutRender = connect(
+  loggedOutMapStateToProps,
+)(SwitchBase)

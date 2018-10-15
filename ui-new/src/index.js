@@ -4,7 +4,7 @@ import './index.scss'
 import * as serviceWorker from './serviceWorker'
 import {BrowserRouter} from 'react-router-dom'
 import Provider from 'react-redux/es/components/Provider'
-import {initializeStore} from './domain/store/initializeStore'
+import {initializeStore} from './domain/store/store'
 import {App} from './app/App'
 
 const store = initializeStore()
