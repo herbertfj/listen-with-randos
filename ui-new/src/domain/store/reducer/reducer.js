@@ -1,8 +1,8 @@
 // @flow
 
 import {combineReducers} from 'redux'
-import type {AppAction} from '../actions/actions'
-import {KEEP_TOKEN, LOGOUT} from '../actions/actions'
+import type {AppAction, Chat} from '../actions/actions'
+import {KEEP_CHATS, KEEP_TOKEN, LOGOUT} from '../actions/actions'
 
 const accessToken = (state?: string | null = null, action: AppAction): string | null => {
   switch (action.type) {
@@ -15,8 +15,18 @@ const accessToken = (state?: string | null = null, action: AppAction): string | 
   }
 }
 
+const chats = (state?: Array<Chat> = [], action: AppAction): Array<Chat> => {
+  switch (action.type) {
+    case KEEP_CHATS:
+      return action.chats
+    default:
+      return state
+  }
+}
+
 const reducers = {
-  accessToken
+  accessToken,
+  chats,
 }
 
 export const reducer = combineReducers(reducers)
