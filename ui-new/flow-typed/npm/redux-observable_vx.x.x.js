@@ -36,7 +36,7 @@ declare module 'redux-observable' {
     lift<R: redux$Action>(operator: rxjs$Operator<T, R>): ActionsObservable<R>;
     lift<R>(operator: rxjs$Operator<T, R>): Observable<R>;
 
-    ofType(...keys: Array<$PropertyType<T, 'type'>>): ActionsObservable<T>;
+    ofType<R: T>(...keys: Array<$PropertyType<R, 'type'>>): ActionsObservable<R>;
   }
 
   declare export class StateObservable<S> extends Observable<S> {
@@ -59,7 +59,7 @@ declare module 'redux-observable' {
 
   declare export function createEpicMiddleware<A, S, D>(options?: EpicMiddlewareOptions<D>): EpicMiddleware<A, S, D>;
 
-  declare export function combineEpics<A: redux$Action, S, D>(...epics: Array<Epic<A, S, D>>): Epic<A, S, D>;
+  declare export function combineEpics<A, S, D>(...epics: Array<Epic<A, S, D>>): Epic<A, S, D>;
 
   declare export function ofType<
     A: redux$Action,
