@@ -1,22 +1,16 @@
-// @flow
-
-import * as React from 'react'
-import type {Location, RouterHistory} from 'react-router-dom'
 import {parse} from 'qs'
+import * as React from 'react'
 import {connect} from 'react-redux'
-import {KEEP_TOKEN} from '../../domain/store/actions/actions'
-import type {Dispatch} from '../../domain/store/actions/actions'
-
-type ReceiveTokenOwnProps = {
-  location: Location,
-  history: RouterHistory,
-}
+import {RouteComponentProps} from 'react-router'
+import {Dispatch} from 'redux'
+import {KEEP_TOKEN} from '../../domain/accessToken/accessToken'
+import {AppAction} from '../../domain/root'
 
 type ReceiveTokenDispatchProps = {
   keep: (accessToken: string) => void,
 }
 
-type ReceiveTokenProps = ReceiveTokenOwnProps & ReceiveTokenDispatchProps
+type ReceiveTokenProps = RouteComponentProps & ReceiveTokenDispatchProps
 
 class ReceiveToken extends React.Component<ReceiveTokenProps> {
   componentDidMount() {
@@ -30,11 +24,11 @@ class ReceiveToken extends React.Component<ReceiveTokenProps> {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  keep(token) {
+const mapDispatchToProps = (dispatch: Dispatch<AppAction>) => ({
+  keep(token: string) {
     dispatch({
-      type: KEEP_TOKEN,
       token,
+      type: KEEP_TOKEN,
     })
   },
 })

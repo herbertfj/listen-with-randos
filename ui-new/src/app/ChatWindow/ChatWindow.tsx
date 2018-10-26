@@ -1,14 +1,12 @@
-// @flow
-
 import * as React from 'react'
+import {SyntheticEvent} from 'react'
 import {connect} from 'react-redux'
-import type {State} from '../../domain/store/reducer/reducer'
-import {SEND_CHAT} from '../../domain/store/actions/actions'
-import type {AppAction, Chat} from '../../domain/store/actions/actions'
-import type {Dispatch} from 'redux'
+import {Dispatch} from 'redux'
+import {Chat, sendChat} from '../../domain/chats/chats'
+import {AppAction, State} from '../../domain/root'
 
 type ChatWindowStateProps = {
-  chats: Array<Chat>
+  chats: Chat[]
 }
 
 type ChatWindowDispatchProps = {
@@ -22,8 +20,8 @@ type ChatWindowState = {
 }
 
 class ChatWindow extends React.PureComponent<ChatWindowProps, ChatWindowState> {
-  constructor() {
-    super()
+  constructor(props: ChatWindowProps) {
+    super(props)
 
     this.state = {
       newChat: '',
@@ -40,9 +38,9 @@ class ChatWindow extends React.PureComponent<ChatWindowProps, ChatWindowState> {
     event.preventDefault()
 
     this.props.sendChat({
-      userId: 'user',
       message: this.state.newChat,
       time: new Date(),
+      userId: 'user',
     })
 
     this.setState({newChat: ''})
@@ -50,7 +48,7 @@ class ChatWindow extends React.PureComponent<ChatWindowProps, ChatWindowState> {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <div>
           <h1>Chats</h1>
           {
@@ -73,7 +71,7 @@ class ChatWindow extends React.PureComponent<ChatWindowProps, ChatWindowState> {
             </div>
           </div>
         </form>
-      </React.Fragment>
+      </>
     )
   }
 }
@@ -83,11 +81,8 @@ const mapStateToProps = (state: State) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<AppAction>) => ({
-  sendChat(chat) {
-    dispatch({
-      type: SEND_CHAT,
-      chat,
-    })
+  sendChat(chat: Chat) {
+    dispatch(sendChat(chat))
   },
 })
 

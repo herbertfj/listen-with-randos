@@ -1,21 +1,15 @@
-// @flow
-
-import {connect} from 'react-redux'
 import * as React from 'react'
-import type {State} from '../../domain/store/reducer/reducer'
-
-type SwitchBaseOwnProps = {
-  children?: React.Node
-}
+import {connect} from 'react-redux'
+import {State} from '../../domain/root'
 
 type SwitchBaseStateProps = {
   render: boolean,
 }
 
-type SwitchBaseProps = SwitchBaseOwnProps & SwitchBaseStateProps
+type SwitchBaseProps = SwitchBaseStateProps
 
-const SwitchBase: React.StatelessFunctionalComponent<SwitchBaseProps> = (props: SwitchBaseProps) => {
-  return props.render ? props.children || null : null
+const SwitchBase: React.SFC<SwitchBaseProps> = (props) => {
+  return props.render ? <>{props.children}</> : null
 }
 
 const isLoggedIn = (state: State): boolean => !!state.accessToken

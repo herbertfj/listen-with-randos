@@ -1,21 +1,18 @@
-// @flow
-
-import * as React from 'react'
 import {stringify} from 'qs'
+import * as React from 'react'
 import {environment} from '../../config/environment'
 
 type LoginLinkProps = {
   className?: string,
-  children?: React.Node,
 }
 
 const spotifyParams = stringify({
   client_id: environment.spotifyClientId,
+  redirect_uri: 'http://localhost:3000/receive',
   response_type: 'token',
-  redirect_uri: 'http://localhost:3000/receive'
 })
 
-export const LoginLink = (props: LoginLinkProps) => (
+export const LoginLink: React.SFC<LoginLinkProps> = (props) => (
   <a href={`https://accounts.spotify.com/authorize?${spotifyParams}`} className={props.className}>
     {props.children}
   </a>
