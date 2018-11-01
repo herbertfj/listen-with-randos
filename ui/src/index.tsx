@@ -1,19 +1,21 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
 import { Provider } from "react-redux"
-import { BrowserRouter } from "react-router-dom"
 import { App } from "./app/App"
 import { initializeStore } from "./domain/store"
 import "./index.scss"
 import * as serviceWorker from "./serviceWorker"
+import { ConnectedRouter } from "connected-react-router"
+import createBrowserHistory from "history/createBrowserHistory"
 
-const store = initializeStore()
+const history = createBrowserHistory()
+const store = initializeStore(history)
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <ConnectedRouter history={history}>
       <App />
-    </BrowserRouter>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById("root") as HTMLElement
 )

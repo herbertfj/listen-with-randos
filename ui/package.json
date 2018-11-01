@@ -24,6 +24,7 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "connected-react-router": "^4.5.0",
     "qs": "^6.5.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",

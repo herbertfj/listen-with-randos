@@ -1,19 +1,23 @@
-import { applyMiddleware, createStore, Store } from "redux"
+import { applyMiddleware, createStore, Store, compose } from "redux"
 import { createEpicMiddleware } from "redux-observable"
 import { AppAction, epic, reducer, State } from "./root"
+import { History } from "history"
+import { connectRouter, routerMiddleware } from "connected-react-router"
 
 export type AppStore = Store<State, AppAction>
 
-export const initializeStore = (): AppStore => {
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+export const initializeStore = (history: History): AppStore => {
   const storedState = window.sessionStorage.getItem("state")
   const preloadedState = storedState ? JSON.parse(storedState) : {}
 
   const epicMiddleware = createEpicMiddleware()
 
   const store = createStore(
-    reducer,
+    connectRouter(history)(reducer),
     preloadedState,
-    applyMiddleware(epicMiddleware)
+    composeEnhancers(applyMiddleware(routerMiddleware(history), epicMiddleware))
   )
 
   epicMiddleware.run(epic)
