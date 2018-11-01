@@ -7,4 +7,3 @@ include 'components:authentication'
 include 'components:spotify-authentication'
 
 include 'api'
-include 'ui'
