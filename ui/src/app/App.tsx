@@ -7,7 +7,7 @@ import { Navbar } from "./Navbar/Navbar"
 import { ConnectedReceiveToken } from "./ReceiveToken/ReceiveToken"
 
 export const App: React.SFC = () => (
-  <div>
+  <>
     <Navbar />
 
     <div className="container">
@@ -19,5 +19,5 @@ export const App: React.SFC = () => (
 
       <Route path={routes.RECEIVE_TOKEN} component={ConnectedReceiveToken} />
     </div>
-  </div>
+  </>
 )

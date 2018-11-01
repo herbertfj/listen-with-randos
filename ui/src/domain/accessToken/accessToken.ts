@@ -27,3 +27,8 @@ export const accessToken: Reducer<string | null, AccessTokenAction> = (
       return state
   }
 }
+
+export const keepToken = (token: string): KeepTokenAction => ({
+  type: KEEP_TOKEN,
+  token,
+})

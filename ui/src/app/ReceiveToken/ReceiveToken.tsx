@@ -3,7 +3,7 @@ import * as React from "react"
 import { connect } from "react-redux"
 import { RouteComponentProps } from "react-router"
 import { Dispatch } from "redux"
-import { KEEP_TOKEN } from "../../domain/accessToken/accessToken"
+import { keepToken } from "../../domain/accessToken/accessToken"
 import { AppAction } from "../../domain/root"
 
 type ReceiveTokenDispatchProps = {
@@ -26,10 +26,7 @@ class ReceiveToken extends React.Component<ReceiveTokenProps> {
 
 const mapDispatchToProps = (dispatch: Dispatch<AppAction>) => ({
   keep(token: string) {
-    dispatch({
-      token,
-      type: KEEP_TOKEN,
-    })
+    dispatch(keepToken(token))
   },
 })
 
