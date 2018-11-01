@@ -1,9 +1,12 @@
-export const fetchGet = (input: RequestInfo, init?: RequestInit): Promise<any> => {
+export const fetchGet = (
+  input: RequestInfo,
+  init?: RequestInit
+): Promise<any> => {
   const options = {
-    method: 'GET',
+    method: "GET",
   }
 
-  return fetch(input, {...options, ...init})
+  return fetch(input, { ...options, ...init })
     .then(response => {
       if (response.ok) return response
       throw new Error(`Status: ${response.status}`)

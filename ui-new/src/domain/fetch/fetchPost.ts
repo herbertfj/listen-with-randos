@@ -1,13 +1,17 @@
-export const fetchPost = (input: RequestInfo, body: any, init?: RequestInit): Promise<any> => {
+export const fetchPost = (
+  input: RequestInfo,
+  body: any,
+  init?: RequestInit
+): Promise<any> => {
   const options = {
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify(body),
     headers: new Headers({
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     }),
   }
 
-  return fetch(input, {...options, ...init})
+  return fetch(input, { ...options, ...init })
     .then(res => {
       if (res.ok) return res
       throw new Error(`Status: ${res.status}`)

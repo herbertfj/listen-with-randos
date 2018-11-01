@@ -1,9 +1,9 @@
-import * as React from 'react'
-import {SyntheticEvent} from 'react'
-import {connect} from 'react-redux'
-import {Dispatch} from 'redux'
-import {Chat, sendChat} from '../../domain/chats/chats'
-import {AppAction, State} from '../../domain/root'
+import * as React from "react"
+import { SyntheticEvent } from "react"
+import { connect } from "react-redux"
+import { Dispatch } from "redux"
+import { Chat, sendChat } from "../../domain/chats/chats"
+import { AppAction, State } from "../../domain/root"
 
 type ChatWindowStateProps = {
   chats: Chat[]
@@ -24,7 +24,7 @@ class ChatWindow extends React.PureComponent<ChatWindowProps, ChatWindowState> {
     super(props)
 
     this.state = {
-      newChat: '',
+      newChat: "",
     }
   }
 
@@ -40,10 +40,10 @@ class ChatWindow extends React.PureComponent<ChatWindowProps, ChatWindowState> {
     this.props.sendChat({
       message: this.state.newChat,
       time: new Date(),
-      userId: 'user',
+      userId: "user",
     })
 
-    this.setState({newChat: ''})
+    this.setState({ newChat: "" })
   }
 
   render() {
@@ -51,23 +51,26 @@ class ChatWindow extends React.PureComponent<ChatWindowProps, ChatWindowState> {
       <>
         <div>
           <h1>Chats</h1>
-          {
-            this.props.chats.map(chat => (
-              <p key={chat.id}>{chat.userId}: {chat.message}</p>
-            ))
-          }
+          {this.props.chats.map(chat => (
+            <p key={chat.id}>
+              {chat.userId}: {chat.message}
+            </p>
+          ))}
         </div>
 
         <form onSubmit={this.onSubmit}>
           <div className="input-group">
-            <input type="text"
-                   className="form-control"
-                   value={this.state.newChat}
-                   onChange={this.onInputChange}
+            <input
+              type="text"
+              className="form-control"
+              value={this.state.newChat}
+              onChange={this.onInputChange}
             />
 
             <div className="input-group-append">
-              <button type="submit" className="btn btn-primary">Send</button>
+              <button type="submit" className="btn btn-primary">
+                Send
+              </button>
             </div>
           </div>
         </form>
@@ -88,5 +91,5 @@ const mapDispatchToProps = (dispatch: Dispatch<AppAction>) => ({
 
 export const ConnectedChatWindow = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(ChatWindow)

@@ -1,4 +1,4 @@
 export const routes = {
-  HOME: '/',
-  RECEIVE_TOKEN: '/receive'
+  HOME: "/",
+  RECEIVE_TOKEN: "/receive",
 }
