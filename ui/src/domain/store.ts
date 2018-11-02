@@ -6,7 +6,10 @@ import { connectRouter, routerMiddleware } from "connected-react-router"
 
 export type AppStore = Store<State, AppAction>
 
-const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const composeEnhancers =
+  process.env.NODE_ENV === "development"
+    ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+    : compose
 
 export const initializeStore = (history: History): AppStore => {
   const storedState = window.sessionStorage.getItem("state")

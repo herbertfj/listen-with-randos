@@ -1,31 +1,30 @@
-import { parse } from "qs"
 import * as React from "react"
+import { useEffect } from "react"
 import { connect } from "react-redux"
 import { RouteComponentProps } from "react-router"
 import { Dispatch } from "redux"
 import { keepToken } from "../../domain/accessToken/accessToken"
 import { AppAction } from "../../domain/root"
+import { parse } from "qs"
 
 type ReceiveTokenDispatchProps = {
-  keep: (accessToken: string) => void
+  keepToken: (accessToken: string) => void
 }
 
 type ReceiveTokenProps = RouteComponentProps & ReceiveTokenDispatchProps
 
-class ReceiveToken extends React.Component<ReceiveTokenProps> {
-  componentDidMount() {
-    const hashParams = this.props.location.hash.substring(1)
-    this.props.keep(parse(hashParams).access_token)
-    this.props.history.push("/")
-  }
+const ReceiveToken: React.SFC<ReceiveTokenProps> = props => {
+  useEffect(() => {
+    const hashParams = props.location.hash.substring(1)
+    props.keepToken(parse(hashParams).access_token)
+    props.history.push("/")
+  })
 
-  render() {
-    return null
-  }
+  return null
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<AppAction>) => ({
-  keep(token: string) {
+  keepToken(token: string) {
     dispatch(keepToken(token))
   },
 })

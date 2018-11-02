@@ -1,5 +1,5 @@
 import * as React from "react"
-import { SyntheticEvent } from "react"
+import { ChangeEvent, FormEvent, useState } from "react"
 import { connect } from "react-redux"
 import { Dispatch } from "redux"
 import { Chat, sendChat } from "../../domain/chats/chats"
@@ -15,68 +15,54 @@ type ChatWindowDispatchProps = {
 
 type ChatWindowProps = ChatWindowStateProps & ChatWindowDispatchProps
 
-type ChatWindowState = {
-  newChat: string
-}
+export const ChatWindow: React.SFC<ChatWindowProps> = ({ chats, sendChat }) => {
+  const [newChat, setNewChat] = useState("")
 
-class ChatWindow extends React.PureComponent<ChatWindowProps, ChatWindowState> {
-  constructor(props: ChatWindowProps) {
-    super(props)
-
-    this.state = {
-      newChat: "",
-    }
+  function onInputChange(event: ChangeEvent<HTMLInputElement>) {
+    setNewChat(event.currentTarget.value)
   }
 
-  onInputChange = (event: SyntheticEvent<HTMLInputElement>) => {
-    this.setState({
-      newChat: event.currentTarget.value,
-    })
-  }
-
-  onSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
+  function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    this.props.sendChat({
-      message: this.state.newChat,
+    sendChat({
+      message: newChat,
       time: new Date(),
       userId: "user",
     })
 
-    this.setState({ newChat: "" })
+    setNewChat("")
   }
 
-  render() {
-    return (
-      <>
-        <div>
-          <h1>Chats</h1>
-          {this.props.chats.map(chat => (
-            <p key={chat.id}>
-              {chat.userId}: {chat.message}
-            </p>
-          ))}
-        </div>
+  return (
+    <>
+      <div>
+        <h1>Chats</h1>
+        {chats.map(chat => (
+          <p key={chat.id}>
+            {chat.userId}: {chat.message}
+          </p>
+        ))}
+      </div>
 
-        <form onSubmit={this.onSubmit}>
-          <div className="input-group">
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.newChat}
-              onChange={this.onInputChange}
-            />
+      <form onSubmit={onSubmit}>
+        <div className="input-group">
+          <input
+            type="text"
+            className="form-control"
+            value={newChat}
+            onChange={onInputChange}
+          />
 
-            <div className="input-group-append">
-              <button type="submit" className="btn btn-primary">
-                Send
-              </button>
-            </div>
+          <div className="input-group-append">
+            <button type="submit" className="btn btn-primary">
+              Send
+            </button>
           </div>
-        </form>
-      </>
-    )
-  }
+        </div>
+      </form>
+    </>
+  )
 }
 
 const mapStateToProps = (state: State) => ({
