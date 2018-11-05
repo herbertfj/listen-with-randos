@@ -3,12 +3,12 @@ import { Reducer } from "redux"
 export const KEEP_TOKEN = "KEEP_TOKEN"
 export const LOGOUT = "LOGOUT"
 
-export type KeepTokenAction = {
+type KeepTokenAction = {
   type: typeof KEEP_TOKEN
   token: string
 }
 
-export type LogoutAction = {
+type LogoutAction = {
   type: typeof LOGOUT
 }
 

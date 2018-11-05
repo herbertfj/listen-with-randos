@@ -19,7 +19,7 @@ export const ChatWindow: React.SFC<ChatWindowProps> = ({ chats, sendChat }) => {
   const [newChat, setNewChat] = useState("")
 
   function onInputChange(event: ChangeEvent<HTMLInputElement>) {
-    setNewChat(event.currentTarget.value)
+    setNewChat(event.target.value)
   }
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -39,19 +39,20 @@ export const ChatWindow: React.SFC<ChatWindowProps> = ({ chats, sendChat }) => {
       <div>
         <h1>Chats</h1>
         {chats.map(chat => (
-          <p key={chat.id}>
+          <p key={chat.id} data-chat>
             {chat.userId}: {chat.message}
           </p>
         ))}
       </div>
 
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} data-form>
         <div className="input-group">
           <input
             type="text"
             className="form-control"
             value={newChat}
             onChange={onInputChange}
+            data-input
           />
 
           <div className="input-group-append">
