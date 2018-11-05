@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { connect } from "react-redux"
 import { RouteComponentProps } from "react-router"
 import { Dispatch } from "redux"
-import { keepToken } from "../../domain/accessToken/accessToken"
+import { keepToken } from "../../domain/user/user"
 import { AppAction } from "../../domain/root"
 import { parse } from "qs"
 

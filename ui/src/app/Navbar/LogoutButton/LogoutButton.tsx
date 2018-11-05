@@ -1,7 +1,7 @@
 import * as React from "react"
 import { connect } from "react-redux"
 import { Dispatch } from "redux"
-import { LOGOUT } from "../../../domain/accessToken/accessToken"
+import { LOGOUT } from "../../../domain/user/user"
 import { AppAction } from "../../../domain/root"
 
 type LogoutButtonDispatchProps = {

@@ -1,14 +1,14 @@
 import { combineReducers } from "redux"
 import { combineEpics } from "redux-observable"
-import { accessToken, AccessTokenAction } from "./accessToken/accessToken"
+import { loginEpic, user, UserAction } from "./user/user"
 import { chats, ChatsAction, sendChatEpic } from "./chats/chats"
 
-export type AppAction = AccessTokenAction | ChatsAction
+export type AppAction = UserAction | ChatsAction
 
-export const epic = combineEpics(sendChatEpic)
+export const epic = combineEpics(sendChatEpic, loginEpic)
 
 const reducers = {
-  accessToken,
+  user,
   chats,
 }
 
@@ -17,3 +17,5 @@ export type State = {
 }
 
 export const reducer = combineReducers(reducers)
+
+export const isLoggedIn = (state: State) => !!state.user.userInfo
