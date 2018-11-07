@@ -3,8 +3,8 @@ import { Epic, ofType } from "redux-observable"
 import { map, switchMap } from "rxjs/operators"
 import { fetchGet } from "../fetch/fetchGet"
 
-export const KEEP_TOKEN = "KEEP_TOKEN"
-export const LOGOUT = "LOGOUT"
+const KEEP_TOKEN = "KEEP_TOKEN"
+const LOGOUT = "LOGOUT"
 const LOGIN = "LOGIN"
 
 type User = {
@@ -42,10 +42,7 @@ const accessToken: Reducer<string | null, UserAction> = (
   }
 }
 
-export const userInfo: Reducer<User | null, UserAction> = (
-  state = null,
-  action
-) => {
+const userInfo: Reducer<User | null, UserAction> = (state = null, action) => {
   switch (action.type) {
     case LOGIN:
       return action.user
@@ -59,6 +56,10 @@ export const userInfo: Reducer<User | null, UserAction> = (
 export const user = combineReducers({
   accessToken,
   userInfo,
+})
+
+export const logOut = (): LogoutAction => ({
+  type: LOGOUT,
 })
 
 export const keepToken = (token: string): KeepTokenAction => ({

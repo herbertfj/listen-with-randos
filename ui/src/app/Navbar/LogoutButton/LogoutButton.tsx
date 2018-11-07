@@ -1,7 +1,7 @@
 import * as React from "react"
 import { connect } from "react-redux"
 import { Dispatch } from "redux"
-import { LOGOUT } from "../../../domain/user/user"
+import { logOut } from "../../../domain/user/user"
 import { AppAction } from "../../../domain/root"
 
 type LogoutButtonDispatchProps = {
@@ -20,7 +20,7 @@ const LogoutButtonComponent: React.SFC<LogoutButtonDispatchProps> = props => (
 
 const mapDispatchToProps = (dispatch: Dispatch<AppAction>) => ({
   logOut() {
-    dispatch({ type: LOGOUT })
+    dispatch(logOut())
   },
 })
 

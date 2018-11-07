@@ -1,8 +1,8 @@
 import * as React from "react"
-import { ChangeEvent, FormEvent, useState } from "react"
+import { ChangeEvent, FormEvent, useEffect, useState } from "react"
 import { connect } from "react-redux"
 import { Dispatch } from "redux"
-import { Chat, sendChat } from "../../domain/chats/chats"
+import { Chat, loadChats, sendChat } from "../../domain/chats/chats"
 import { AppAction, State } from "../../domain/root"
 
 type ChatWindowStateProps = {
@@ -11,11 +11,20 @@ type ChatWindowStateProps = {
 
 type ChatWindowDispatchProps = {
   sendChat(chat: Chat): void
+  loadChats(): void
 }
 
 type ChatWindowProps = ChatWindowStateProps & ChatWindowDispatchProps
 
-export const ChatWindow: React.SFC<ChatWindowProps> = ({ chats, sendChat }) => {
+export const ChatWindow: React.SFC<ChatWindowProps> = ({
+  chats,
+  sendChat,
+  loadChats,
+}) => {
+  useEffect(() => {
+    loadChats()
+  }, [])
+
   const [newChat, setNewChat] = useState("")
 
   function onInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -71,6 +80,9 @@ const mapStateToProps = (state: State) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<AppAction>) => ({
+  loadChats() {
+    dispatch(loadChats())
+  },
   sendChat(chat: Chat) {
     dispatch(sendChat(chat))
   },

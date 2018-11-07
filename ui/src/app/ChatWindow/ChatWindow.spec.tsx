@@ -13,18 +13,42 @@ describe("ChatWindow", () => {
     },
   ]
 
+  let loadChats: jest.Mock
   let sendChat: jest.Mock
   let wrapper: ReactWrapper
 
   beforeEach(() => {
+    loadChats = jest.fn().mockName("loadChats")
     sendChat = jest.fn().mockName("sendChat")
-    wrapper = mount(<ChatWindow chats={chats} sendChat={sendChat} />)
+    wrapper = mount(
+      <ChatWindow chats={chats} loadChats={loadChats} sendChat={sendChat} />
+    )
   })
 
   it("should display the chats", () => {
     const chats = wrapper.find("[data-chat]").map(chat => chat.text())
 
     expect(chats).toContain("userId1: message")
+  })
+
+  describe("when it mounts", () => {
+    beforeEach(() => {
+      wrapper.mount()
+    })
+
+    it("should load the chats", () => {
+      expect(loadChats).toHaveBeenCalled()
+    })
+
+    describe("and mounts again", () => {
+      beforeEach(() => {
+        wrapper.mount()
+      })
+
+      it("shouldn't reload the chats", () => {
+        expect(loadChats).toHaveBeenCalledTimes(1)
+      })
+    })
   })
 
   describe("when a message is entered", () => {
