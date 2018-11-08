@@ -1,13 +1,15 @@
 import { Action, combineReducers, Reducer } from "redux"
 import { Epic, ofType } from "redux-observable"
-import { map, switchMap } from "rxjs/operators"
+import { flatMap, map, switchMap } from "rxjs/operators"
 import { fetchGet } from "../fetch/fetchGet"
+import { push } from "connected-react-router"
+import { routes } from "../../config/routes"
 
 const KEEP_TOKEN = "KEEP_TOKEN"
 const LOGOUT = "LOGOUT"
 const LOGIN = "LOGIN"
 
-type User = {
+export type User = {
   displayName: string
   spotifyId: string
 }
@@ -67,6 +69,11 @@ export const keepToken = (token: string): KeepTokenAction => ({
   token,
 })
 
+const login = (user: User): LoginAction => ({
+  type: LOGIN,
+  user,
+})
+
 export const loginEpic: Epic = $action =>
   $action.pipe(
     ofType<Action, KeepTokenAction>(KEEP_TOKEN),
@@ -77,10 +84,12 @@ export const loginEpic: Epic = $action =>
       })
     ),
     map(response => ({
-      type: LOGIN,
-      user: {
-        displayName: response.display_name,
-        spotifyId: response.id,
-      },
-    }))
+      displayName: response.display_name,
+      spotifyId: response.id,
+    })),
+    flatMap(user =>
+      fetchGet(`/api/users?spotifyId=${user.spotifyId}`)
+        .then(response => login(response))
+        .catch(() => push(routes.REGISTER, user))
+    )
   )
