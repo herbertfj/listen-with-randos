@@ -5,5 +5,7 @@ include 'components:chats'
 include 'components:mongo-chats'
 include 'components:authentication'
 include 'components:spotify-authentication'
+include 'components:users'
+include 'components:mongo-users'
 
 include 'api'

@@ -9,8 +9,8 @@ class ChatRoutesConfiguration {
     @Bean
     fun chatRoutes(chatHandler: ChatHandler) = router {
         path("/api/chats").nest {
-            POST("", chatHandler::saveChat)
-            GET("", chatHandler::getChats)
+            POST("/", chatHandler::saveChat)
+            GET("/", chatHandler::getChats)
 
             GET("/new", chatHandler::generateRandom)
         }

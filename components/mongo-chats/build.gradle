@@ -2,5 +2,4 @@ dependencies {
     compile project(":components:chats")
 
     compile "org.springframework.boot:spring-boot-starter-data-mongodb-reactive"
-    compile "io.projectreactor:reactor-core"
 }
