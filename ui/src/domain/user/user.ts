@@ -12,6 +12,7 @@ const LOGIN = "LOGIN"
 const REGISTER = "REGISTER"
 
 export type User = {
+  id: string
   displayName: string
   spotifyId: string
 }
@@ -32,7 +33,7 @@ type LogoutAction = {
 
 type RegisterAction = {
   type: typeof REGISTER
-  user: User
+  user: Partial<User>
 }
 
 export type UserAction =
@@ -85,7 +86,7 @@ const login = (user: User): LoginAction => ({
   user,
 })
 
-export const register = (user: User): RegisterAction => ({
+export const register = (user: Partial<User>): RegisterAction => ({
   type: REGISTER,
   user,
 })

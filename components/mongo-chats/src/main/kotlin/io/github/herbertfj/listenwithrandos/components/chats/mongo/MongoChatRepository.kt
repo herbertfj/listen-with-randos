@@ -16,7 +16,7 @@ private val recentQuery = Query(
 )
 
 @Repository
-class MongoChatRepository(val mongoTemplate: ReactiveMongoTemplate): ChatRepository {
+class MongoChatRepository(private val mongoTemplate: ReactiveMongoTemplate): ChatRepository {
     override fun getRecent(): Flux<Chat> {
         return mongoTemplate.find(recentQuery, Chat::class.java)
     }

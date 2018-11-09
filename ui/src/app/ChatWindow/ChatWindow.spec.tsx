@@ -2,16 +2,26 @@ import * as React from "react"
 import { mount, ReactWrapper } from "enzyme"
 import { ChatWindow } from "./ChatWindow"
 import { Chat } from "../../domain/chats/chats"
+import { User } from "../../domain/user/user"
 
 describe("ChatWindow", () => {
   const chats: Chat[] = [
     {
       id: "1",
-      userId: "userId1",
       message: "message",
       time: new Date(),
+      user: {
+        id: "userId",
+        displayName: "displayName",
+      },
     },
   ]
+
+  const user: User = {
+    id: "userId",
+    displayName: "displayName",
+    spotifyId: "spotifyId",
+  }
 
   let loadChats: jest.Mock
   let sendChat: jest.Mock
@@ -21,14 +31,19 @@ describe("ChatWindow", () => {
     loadChats = jest.fn().mockName("loadChats")
     sendChat = jest.fn().mockName("sendChat")
     wrapper = mount(
-      <ChatWindow chats={chats} loadChats={loadChats} sendChat={sendChat} />
+      <ChatWindow
+        chats={chats}
+        user={user}
+        loadChats={loadChats}
+        sendChat={sendChat}
+      />
     )
   })
 
   it("should display the chats", () => {
     const chats = wrapper.find("[data-chat]").map(chat => chat.text())
 
-    expect(chats).toContain("userId1: message")
+    expect(chats).toContain("displayName: message")
   })
 
   describe("when it mounts", () => {

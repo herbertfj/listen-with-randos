@@ -45,7 +45,7 @@ class MongoUserRepositoryTest {
     fun `find finds a stored user by spotifyId`() {
         val created = mongoTemplate.insert(User(spotifyId = "spotifyId", displayName = "displayName")).block()
 
-        val found = mongoUserRepository.find(created!!.spotifyId).block()
+        val found = mongoUserRepository.findBySpotifyId(created!!.spotifyId).block()
 
         assertThat(found).isEqualTo(created)
     }

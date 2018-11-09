@@ -6,9 +6,18 @@ import { fetchPost } from "../fetch/fetchPost"
 
 export type Chat = {
   id?: string
-  userId: string
   message: string
   time: Date
+  user: {
+    id: string
+    displayName: string
+  }
+}
+
+export type ChatMessage = {
+  message: string
+  time: Date
+  userId: string
 }
 
 const SEND_CHAT = "SEND_CHAT"
@@ -22,7 +31,7 @@ type KeepChatsAction = {
 
 type SendChatAction = {
   type: typeof SEND_CHAT
-  chat: Chat
+  chat: ChatMessage
 }
 
 type LoadChatsAction = {
@@ -40,7 +49,7 @@ export const chats: Reducer<Chat[], ChatsAction> = (state = [], action) => {
   }
 }
 
-export const sendChat = (chat: Chat): SendChatAction => ({
+export const sendChat = (chat: ChatMessage): SendChatAction => ({
   type: SEND_CHAT,
   chat,
 })
@@ -58,7 +67,7 @@ const getChats = (): Promise<Chat[]> => {
   return fetchGet("/api/chats")
 }
 
-const postChat = (chat: Chat): Promise<Chat> => {
+const postChat = (chat: ChatMessage): Promise<Chat> => {
   return fetchPost("/api/chats", chat)
 }
 

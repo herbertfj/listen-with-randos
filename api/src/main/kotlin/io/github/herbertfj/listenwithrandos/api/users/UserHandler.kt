@@ -14,14 +14,14 @@ class UserHandler(val userRepository: UserRepository) {
 
     fun findUser(request: ServerRequest) =
         Mono.justOrEmpty(request.queryParam("spotifyId"))
-            .flatMap { userRepository.find(it) }
+            .flatMap { userRepository.findBySpotifyId(it) }
             .flatMap { ok().syncBody(it) }
             .switchIfEmpty(notFound().build())
 
     fun createUser(request: ServerRequest) = request
         .bodyToMono<User>()
         .flatMap {
-            userRepository.find(it.spotifyId)
+            userRepository.findBySpotifyId(it.spotifyId)
                 .switchIfEmpty(userRepository.create(it))
         }
         .flatMap { ok().syncBody(it) }

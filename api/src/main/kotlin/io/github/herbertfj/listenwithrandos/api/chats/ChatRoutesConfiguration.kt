@@ -11,8 +11,6 @@ class ChatRoutesConfiguration {
         path("/api/chats").nest {
             POST("/", chatHandler::saveChat)
             GET("/", chatHandler::getChats)
-
-            GET("/new", chatHandler::generateRandom)
         }
     }
 }

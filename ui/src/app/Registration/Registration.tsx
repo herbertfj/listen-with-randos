@@ -7,7 +7,7 @@ import { Dispatch } from "redux"
 import { AppAction } from "../../domain/root"
 
 type RegistrationDispatchProps = {
-  register(user: User): void
+  register(user: Partial<User>): void
 }
 
 type RegistrationProps = RouteComponentProps<{}, StaticContext, User> &
@@ -58,7 +58,7 @@ const Registration: React.SFC<RegistrationProps> = props => {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<AppAction>) => ({
-  register(user: User) {
+  register(user: Partial<User>) {
     dispatch(register(user))
   },
 })

@@ -2,15 +2,22 @@ import * as React from "react"
 import { ChangeEvent, FormEvent, useEffect, useState } from "react"
 import { connect } from "react-redux"
 import { Dispatch } from "redux"
-import { Chat, loadChats, sendChat } from "../../domain/chats/chats"
+import {
+  Chat,
+  ChatMessage,
+  loadChats,
+  sendChat,
+} from "../../domain/chats/chats"
 import { AppAction, State } from "../../domain/root"
+import { User } from "../../domain/user/user"
 
 type ChatWindowStateProps = {
   chats: Chat[]
+  user: User
 }
 
 type ChatWindowDispatchProps = {
-  sendChat(chat: Chat): void
+  sendChat(chat: ChatMessage): void
   loadChats(): void
 }
 
@@ -18,6 +25,7 @@ type ChatWindowProps = ChatWindowStateProps & ChatWindowDispatchProps
 
 export const ChatWindow: React.SFC<ChatWindowProps> = ({
   chats,
+  user,
   sendChat,
   loadChats,
 }) => {
@@ -37,7 +45,7 @@ export const ChatWindow: React.SFC<ChatWindowProps> = ({
     sendChat({
       message: newChat,
       time: new Date(),
-      userId: "user",
+      userId: user.id,
     })
 
     setNewChat("")
@@ -49,7 +57,7 @@ export const ChatWindow: React.SFC<ChatWindowProps> = ({
         <h1>Chats</h1>
         {chats.map(chat => (
           <p key={chat.id} data-chat>
-            {chat.userId}: {chat.message}
+            {chat.user.displayName}: {chat.message}
           </p>
         ))}
       </div>
@@ -77,13 +85,14 @@ export const ChatWindow: React.SFC<ChatWindowProps> = ({
 
 const mapStateToProps = (state: State) => ({
   chats: state.chats,
+  user: state.user.userInfo!!,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<AppAction>) => ({
   loadChats() {
     dispatch(loadChats())
   },
-  sendChat(chat: Chat) {
+  sendChat(chat: ChatMessage) {
     dispatch(sendChat(chat))
   },
 })
