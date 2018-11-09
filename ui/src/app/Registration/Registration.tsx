@@ -1,12 +1,27 @@
 import * as React from "react"
 import { ChangeEvent, FormEvent, useState } from "react"
 import { RouteComponentProps, StaticContext } from "react-router"
-import { User } from "../../domain/user/user"
+import { register, User } from "../../domain/user/user"
+import { connect } from "react-redux"
+import { Dispatch } from "redux"
+import { AppAction } from "../../domain/root"
 
-type RegistrationProps = RouteComponentProps<{}, StaticContext, User>
+type RegistrationDispatchProps = {
+  register(user: User): void
+}
 
-export const Registration: React.SFC<RegistrationProps> = props => {
+type RegistrationProps = RouteComponentProps<{}, StaticContext, User> &
+  RegistrationDispatchProps
+
+const Registration: React.SFC<RegistrationProps> = props => {
   const user = props.location.state
+
+  if (!props.location.state || !props.location.state.spotifyId) {
+    props.history.replace("/")
+
+    return null
+  }
+
   const [displayName, setDisplayName] = useState(user.displayName)
 
   function onInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -15,6 +30,11 @@ export const Registration: React.SFC<RegistrationProps> = props => {
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+
+    props.register({
+      displayName,
+      spotifyId: user.spotifyId,
+    })
   }
 
   return (
@@ -36,3 +56,14 @@ export const Registration: React.SFC<RegistrationProps> = props => {
     </form>
   )
 }
+
+const mapDispatchToProps = (dispatch: Dispatch<AppAction>) => ({
+  register(user: User) {
+    dispatch(register(user))
+  },
+})
+
+export const ConnectedRegistration = connect(
+  null,
+  mapDispatchToProps
+)(Registration)

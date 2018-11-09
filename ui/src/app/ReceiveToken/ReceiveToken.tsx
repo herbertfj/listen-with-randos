@@ -17,7 +17,6 @@ const ReceiveToken: React.SFC<ReceiveTokenProps> = props => {
   useEffect(() => {
     const hashParams = props.location.hash.substring(1)
     props.keepToken(parse(hashParams).access_token)
-    props.history.replace("/")
   }, [])
 
   return null

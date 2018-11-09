@@ -1,13 +1,15 @@
 import { Action, combineReducers, Reducer } from "redux"
-import { Epic, ofType } from "redux-observable"
-import { flatMap, map, switchMap } from "rxjs/operators"
+import { combineEpics, Epic, ofType } from "redux-observable"
+import { flatMap, map, mapTo, switchMap } from "rxjs/operators"
 import { fetchGet } from "../fetch/fetchGet"
-import { push } from "connected-react-router"
+import { push, replace } from "connected-react-router"
 import { routes } from "../../config/routes"
+import { fetchPost } from "../fetch/fetchPost"
 
 const KEEP_TOKEN = "KEEP_TOKEN"
 const LOGOUT = "LOGOUT"
 const LOGIN = "LOGIN"
+const REGISTER = "REGISTER"
 
 export type User = {
   displayName: string
@@ -28,7 +30,16 @@ type LogoutAction = {
   type: typeof LOGOUT
 }
 
-export type UserAction = KeepTokenAction | LogoutAction | LoginAction
+type RegisterAction = {
+  type: typeof REGISTER
+  user: User
+}
+
+export type UserAction =
+  | KeepTokenAction
+  | LogoutAction
+  | LoginAction
+  | RegisterAction
 
 const accessToken: Reducer<string | null, UserAction> = (
   state = null,
@@ -74,7 +85,12 @@ const login = (user: User): LoginAction => ({
   user,
 })
 
-export const loginEpic: Epic = $action =>
+export const register = (user: User): RegisterAction => ({
+  type: REGISTER,
+  user,
+})
+
+const authorizeEpic: Epic = $action =>
   $action.pipe(
     ofType<Action, KeepTokenAction>(KEEP_TOKEN),
     map(action => action.token),
@@ -93,3 +109,19 @@ export const loginEpic: Epic = $action =>
         .catch(() => push(routes.REGISTER, user))
     )
   )
+
+const registerEpic: Epic = $action =>
+  $action.pipe(
+    ofType<Action, RegisterAction>(REGISTER),
+    map(action => action.user),
+    flatMap(user => fetchPost("/api/users", user)),
+    map(login)
+  )
+
+const loginEpic: Epic = $action =>
+  $action.pipe(
+    ofType<Action, LoginAction>(LOGIN),
+    mapTo(replace(routes.HOME))
+  )
+
+export const userEpic = combineEpics(authorizeEpic, registerEpic, loginEpic)
