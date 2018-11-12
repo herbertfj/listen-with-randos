@@ -1,0 +1,18 @@
+task bootRun(type: Exec) {
+    group "application"
+
+    commandLine "npm", "start"
+}
+
+task install(type: Exec) {
+    group "build"
+
+    commandLine "npm", "install"
+}
+
+task build(type: Exec) {
+    group "build"
+
+    dependsOn(install)
+    commandLine "npm", "run", "build"
+}

@@ -1,12 +1,12 @@
 package io.github.herbertfj.listenwithrandos.api.chats
 
-import io.github.herbertfj.listenwithrandos.components.chats.Chat
 import io.github.herbertfj.listenwithrandos.components.chats.ChatMessage
 import io.github.herbertfj.listenwithrandos.components.chats.ChatRepository
 import io.github.herbertfj.listenwithrandos.components.chats.StoreChat
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse.ok
+import org.springframework.web.reactive.function.server.body
 import org.springframework.web.reactive.function.server.bodyToMono
 
 @Component
@@ -19,6 +19,6 @@ class ChatHandler(val chatRepository: ChatRepository,
         .flatMap { ok().syncBody(it) }
 
     fun getChats(request: ServerRequest) =
-        ok().body(chatRepository.getRecent(), Chat::class.java)
+        ok().body(chatRepository.getRecent())
 
 }

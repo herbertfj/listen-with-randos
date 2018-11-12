@@ -9,3 +9,4 @@ include 'components:users'
 include 'components:mongo-users'
 
 include 'api'
+include 'ui'
