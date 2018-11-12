@@ -10,9 +10,19 @@ task install(type: Exec) {
     commandLine "npm", "install"
 }
 
+task test(type: Exec) {
+    group "verification"
+
+    commandLine "npm", "test"
+}
+
+test.environment([
+    "CI": "true"
+])
+
 task build(type: Exec) {
     group "build"
 
-    dependsOn(install)
+    dependsOn install, test
     commandLine "npm", "run", "build"
 }
