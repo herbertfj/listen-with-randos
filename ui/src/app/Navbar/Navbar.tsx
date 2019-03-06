@@ -5,7 +5,7 @@ import { LoggedInRender, LoggedOutRender } from "../LoginSwitch/LoginSwitch"
 import { LogoutButton } from "./LogoutButton/LogoutButton"
 import { DisplayName } from "../DisplayName/DisplayName"
 
-export const Navbar: React.SFC = () => (
+export const Navbar: React.FC = () => (
   <nav className="navbar navbar-expand">
     <div className="container">
       <Link to="/" className="navbar-brand">

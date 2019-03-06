@@ -12,7 +12,7 @@ const spotifyParams = stringify({
   response_type: "token",
 })
 
-export const LoginLink: React.SFC<LoginLinkProps> = props => (
+export const LoginLink: React.FC<LoginLinkProps> = props => (
   <a
     href={`https://accounts.spotify.com/authorize?${spotifyParams}`}
     className={props.className}

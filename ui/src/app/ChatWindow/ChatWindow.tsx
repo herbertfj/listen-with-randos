@@ -23,7 +23,7 @@ type ChatWindowDispatchProps = {
 
 type ChatWindowProps = ChatWindowStateProps & ChatWindowDispatchProps
 
-export const ChatWindow: React.SFC<ChatWindowProps> = ({
+export const ChatWindow: React.FC<ChatWindowProps> = ({
   chats,
   user,
   sendChat,

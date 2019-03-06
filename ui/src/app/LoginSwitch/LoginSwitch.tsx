@@ -8,7 +8,7 @@ type SwitchBaseStateProps = {
 
 type SwitchBaseProps = SwitchBaseStateProps
 
-const SwitchBase: React.SFC<SwitchBaseProps> = ({ render, children }) => {
+const SwitchBase: React.FC<SwitchBaseProps> = ({ render, children }) => {
   return render ? <>{children}</> : null
 }
 

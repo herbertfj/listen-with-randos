@@ -13,7 +13,7 @@ type RegistrationDispatchProps = {
 type RegistrationProps = RouteComponentProps<{}, StaticContext, User> &
   RegistrationDispatchProps
 
-const Registration: React.SFC<RegistrationProps> = props => {
+const Registration: React.FC<RegistrationProps> = props => {
   const user = props.location.state
 
   if (!props.location.state || !props.location.state.spotifyId) {

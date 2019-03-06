@@ -6,7 +6,7 @@ type DisplayNameStateProps = {
   displayName: string | null
 }
 
-const DisplayNameComponent: React.SFC<DisplayNameStateProps> = props => (
+const DisplayNameComponent: React.FC<DisplayNameStateProps> = props => (
   <span>{props.displayName}</span>
 )
 

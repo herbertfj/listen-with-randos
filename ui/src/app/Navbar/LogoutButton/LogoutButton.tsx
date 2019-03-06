@@ -8,7 +8,7 @@ type LogoutButtonDispatchProps = {
   logOut: () => any
 }
 
-const LogoutButtonComponent: React.SFC<LogoutButtonDispatchProps> = props => (
+const LogoutButtonComponent: React.FC<LogoutButtonDispatchProps> = props => (
   <button
     type="button"
     className="btn btn-link nav-link"

@@ -13,7 +13,7 @@ type ReceiveTokenDispatchProps = {
 
 type ReceiveTokenProps = RouteComponentProps & ReceiveTokenDispatchProps
 
-const ReceiveToken: React.SFC<ReceiveTokenProps> = props => {
+const ReceiveToken: React.FC<ReceiveTokenProps> = props => {
   useEffect(() => {
     const hashParams = props.location.hash.substring(1)
     props.keepToken(parse(hashParams).access_token)

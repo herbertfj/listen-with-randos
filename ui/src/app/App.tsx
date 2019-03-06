@@ -7,7 +7,7 @@ import { Navbar } from "./Navbar/Navbar"
 import { ConnectedReceiveToken } from "./ReceiveToken/ReceiveToken"
 import { ConnectedRegistration } from "./Registration/Registration"
 
-export const App: React.SFC = () => (
+export const App: React.FC = () => (
   <>
     <Navbar />
 
