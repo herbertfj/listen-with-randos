@@ -1,6 +1,6 @@
 subprojects {
-    apply plugin: 'kotlin'
-    apply plugin: 'kotlin-spring'
+    apply plugin: 'org.jetbrains.kotlin.jvm'
+    apply plugin: 'org.jetbrains.kotlin.plugin.spring'
     apply plugin: 'io.spring.dependency-management'
 
     group = 'io.github.herbertfj.listenwithrandos'
@@ -21,8 +21,8 @@ subprojects {
     }
 
     dependencies {
-        compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-        testCompile "org.jetbrains.kotlin:kotlin-reflect"
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+        testImplementation "org.jetbrains.kotlin:kotlin-reflect"
     }
 
     dependencyManagement {

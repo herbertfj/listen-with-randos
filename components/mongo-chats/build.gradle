@@ -1,5 +1,5 @@
 dependencies {
-    compile project(":components:chats")
+    implementation project(":components:chats")
 
-    compile "org.springframework.boot:spring-boot-starter-data-mongodb-reactive"
+    implementation "org.springframework.boot:spring-boot-starter-data-mongodb-reactive"
 }
