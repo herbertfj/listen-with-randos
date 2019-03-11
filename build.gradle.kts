@@ -1,5 +1,6 @@
 val kotlinVersion by extra("1.2.71")
 val springBootVersion by extra("2.1.3.RELEASE")
+val junitJupiterVersion by extra("5.4.0")
 
 plugins {
     id("org.springframework.boot") version "2.1.3.RELEASE" apply false

@@ -1,5 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile
 
+val junitJupiterVersion: String by rootProject.extra
+
 plugins {
     id("org.jetbrains.kotlin.jvm")
     id("org.jetbrains.kotlin.plugin.spring")
@@ -10,14 +12,7 @@ plugins {
 group = "io.github.herbertfj.listenwithrandos"
 version = "0.0.1-SNAPSHOT"
 
-tasks.named<KotlinJvmCompile>("compileKotlin") {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "1.8"
-    }
-}
-
-tasks.named<KotlinJvmCompile>("compileTestKotlin") {
+tasks.withType<KotlinJvmCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "1.8"
@@ -42,4 +37,5 @@ dependencies {
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
+    testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
 }
