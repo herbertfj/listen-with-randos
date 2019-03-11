@@ -5,7 +5,7 @@ import { logOut } from "../../../domain/user/user"
 import { AppAction } from "../../../domain/root"
 
 type LogoutButtonDispatchProps = {
-  logOut: () => any
+  logOut(): any
 }
 
 const LogoutButtonComponent: React.FC<LogoutButtonDispatchProps> = props => (

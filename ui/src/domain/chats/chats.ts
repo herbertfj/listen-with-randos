@@ -26,12 +26,16 @@ const LOAD_CHATS = "LOAD_CHATS"
 
 type KeepChatsAction = {
   type: typeof KEEP_CHATS
-  chats: Chat[]
+  payload: {
+    chats: Chat[]
+  }
 }
 
 type SendChatAction = {
   type: typeof SEND_CHAT
-  chat: ChatMessage
+  payload: {
+    chat: ChatMessage
+  }
 }
 
 type LoadChatsAction = {
@@ -43,7 +47,7 @@ export type ChatsAction = KeepChatsAction | SendChatAction | LoadChatsAction
 export const chats: Reducer<Chat[], ChatsAction> = (state = [], action) => {
   switch (action.type) {
     case KEEP_CHATS:
-      return action.chats
+      return action.payload.chats
     default:
       return state
   }
@@ -51,12 +55,16 @@ export const chats: Reducer<Chat[], ChatsAction> = (state = [], action) => {
 
 export const sendChat = (chat: ChatMessage): SendChatAction => ({
   type: SEND_CHAT,
-  chat,
+  payload: {
+    chat,
+  },
 })
 
 export const keepChats = (chatsToKeep: Chat[]): KeepChatsAction => ({
   type: KEEP_CHATS,
-  chats: chatsToKeep,
+  payload: {
+    chats: chatsToKeep,
+  },
 })
 
 export const loadChats = (): LoadChatsAction => ({
@@ -74,7 +82,7 @@ const postChat = (chat: ChatMessage): Promise<Chat> => {
 const sendChatEpic: Epic = action$ =>
   action$.pipe(
     ofType<Action, SendChatAction>(SEND_CHAT),
-    concatMap(action => postChat(action.chat)),
+    concatMap(action => postChat(action.payload.chat)),
     switchMap(() => getChats()),
     map(keepChats)
   )

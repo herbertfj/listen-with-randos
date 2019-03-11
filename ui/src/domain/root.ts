@@ -3,7 +3,7 @@ import { combineEpics } from "redux-observable"
 import { user, UserAction, userEpic } from "./user/user"
 import { chats, ChatsAction, chatsEpic } from "./chats/chats"
 import { History } from "history"
-import { connectRouter } from "connected-react-router"
+import { connectRouter, RouterState } from "connected-react-router"
 
 export type AppAction = UserAction | ChatsAction
 
@@ -16,7 +16,7 @@ const reducers = {
 
 export type State = {
   [P in keyof typeof reducers]: ReturnType<(typeof reducers)[P]>
-}
+} & { router: RouterState }
 
 export const reducer = (history: History) =>
   combineReducers({

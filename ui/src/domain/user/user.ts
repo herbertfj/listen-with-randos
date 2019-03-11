@@ -19,12 +19,16 @@ export type User = {
 
 type KeepTokenAction = {
   type: typeof KEEP_TOKEN
-  token: string
+  payload: {
+    token: string
+  }
 }
 
 type LoginAction = {
   type: typeof LOGIN
-  user: User
+  payload: {
+    user: User
+  }
 }
 
 type LogoutAction = {
@@ -33,7 +37,9 @@ type LogoutAction = {
 
 type RegisterAction = {
   type: typeof REGISTER
-  user: Partial<User>
+  payload: {
+    user: Partial<User>
+  }
 }
 
 export type UserAction =
@@ -48,7 +54,7 @@ const accessToken: Reducer<string | null, UserAction> = (
 ) => {
   switch (action.type) {
     case KEEP_TOKEN:
-      return action.token
+      return action.payload.token
     case LOGOUT:
       return null
     default:
@@ -59,7 +65,7 @@ const accessToken: Reducer<string | null, UserAction> = (
 const userInfo: Reducer<User | null, UserAction> = (state = null, action) => {
   switch (action.type) {
     case LOGIN:
-      return action.user
+      return action.payload.user
     case LOGOUT:
       return null
     default:
@@ -78,23 +84,29 @@ export const logOut = (): LogoutAction => ({
 
 export const keepToken = (token: string): KeepTokenAction => ({
   type: KEEP_TOKEN,
-  token,
+  payload: {
+    token,
+  },
 })
 
 const login = (user: User): LoginAction => ({
   type: LOGIN,
-  user,
+  payload: {
+    user,
+  },
 })
 
 export const register = (user: Partial<User>): RegisterAction => ({
   type: REGISTER,
-  user,
+  payload: {
+    user,
+  },
 })
 
 const authorizeEpic: Epic = $action =>
   $action.pipe(
     ofType<Action, KeepTokenAction>(KEEP_TOKEN),
-    map(action => action.token),
+    map(action => action.payload.token),
     switchMap(token =>
       fetchGet("https://api.spotify.com/v1/me", {
         headers: new Headers({ Authorization: `Bearer ${token}` }),
@@ -114,7 +126,7 @@ const authorizeEpic: Epic = $action =>
 const registerEpic: Epic = $action =>
   $action.pipe(
     ofType<Action, RegisterAction>(REGISTER),
-    map(action => action.user),
+    map(action => action.payload.user),
     flatMap(user => fetchPost("/api/users", user)),
     map(login)
   )
