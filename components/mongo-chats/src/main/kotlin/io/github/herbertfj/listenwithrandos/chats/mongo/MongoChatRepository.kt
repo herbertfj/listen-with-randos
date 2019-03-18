@@ -1,7 +1,7 @@
-package io.github.herbertfj.listenwithrandos.components.chats.mongo
+package io.github.herbertfj.listenwithrandos.chats.mongo
 
-import io.github.herbertfj.listenwithrandos.components.chats.Chat
-import io.github.herbertfj.listenwithrandos.components.chats.ChatRepository
+import io.github.herbertfj.listenwithrandos.chats.core.Chat
+import io.github.herbertfj.listenwithrandos.chats.core.ChatRepository
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate
 import org.springframework.data.mongodb.core.query.Criteria.where
 import org.springframework.data.mongodb.core.query.Query

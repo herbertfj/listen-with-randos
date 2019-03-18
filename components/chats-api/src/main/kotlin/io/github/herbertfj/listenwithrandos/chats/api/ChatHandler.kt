@@ -1,8 +1,8 @@
 package io.github.herbertfj.listenwithrandos.chats.api
 
-import io.github.herbertfj.listenwithrandos.components.chats.ChatMessage
-import io.github.herbertfj.listenwithrandos.components.chats.ChatRepository
-import io.github.herbertfj.listenwithrandos.components.chats.StoreChat
+import io.github.herbertfj.listenwithrandos.chats.core.ChatMessage
+import io.github.herbertfj.listenwithrandos.chats.core.ChatRepository
+import io.github.herbertfj.listenwithrandos.chats.core.StoreChat
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse.ok

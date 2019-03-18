@@ -1,7 +1,7 @@
 package io.github.herbertfj.listenwithrandos.chats.api
 
-import io.github.herbertfj.listenwithrandos.components.chats.ChatRepository
-import io.github.herbertfj.listenwithrandos.components.chats.StoreChat
+import io.github.herbertfj.listenwithrandos.chats.core.ChatRepository
+import io.github.herbertfj.listenwithrandos.chats.core.StoreChat
 import io.github.herbertfj.listenwithrandos.components.users.UserRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

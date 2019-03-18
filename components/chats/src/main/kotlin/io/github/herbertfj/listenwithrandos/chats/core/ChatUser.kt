@@ -1,4 +1,4 @@
-package io.github.herbertfj.listenwithrandos.components.chats
+package io.github.herbertfj.listenwithrandos.chats.core
 
 data class ChatUser(
     val id: String,

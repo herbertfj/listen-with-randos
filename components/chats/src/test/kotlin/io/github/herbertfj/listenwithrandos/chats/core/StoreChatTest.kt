@@ -1,8 +1,7 @@
-package io.github.herbertfj.listenwithrandos.components.chats
+package io.github.herbertfj.listenwithrandos.chats.core
 
 import io.github.herbertfj.listenwithrandos.components.users.User
 import io.github.herbertfj.listenwithrandos.components.users.UserRepository
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito.given

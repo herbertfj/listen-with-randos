@@ -1,4 +1,4 @@
-package io.github.herbertfj.listenwithrandos.components.chats
+package io.github.herbertfj.listenwithrandos.chats.core
 
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
