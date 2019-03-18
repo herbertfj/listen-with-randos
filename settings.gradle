@@ -1,7 +1,7 @@
 rootProject.name = 'listen-with-randos'
 
 include 'components:playlists'
-include 'components:chats'
+include 'components:chats-core'
 include 'components:mongo-chats'
 include 'components:authentication'
 include 'components:spotify-authentication'
