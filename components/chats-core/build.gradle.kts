@@ -1,5 +1,5 @@
 dependencies {
-    implementation(project(":components:users"))
+    implementation(project(":components:users-core"))
     implementation("io.projectreactor:reactor-core")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
