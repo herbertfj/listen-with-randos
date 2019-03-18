@@ -1,7 +1,7 @@
 package io.github.herbertfj.listenwithrandos.users.api
 
-import io.github.herbertfj.listenwithrandos.components.users.User
-import io.github.herbertfj.listenwithrandos.components.users.UserRepository
+import io.github.herbertfj.listenwithrandos.users.core.User
+import io.github.herbertfj.listenwithrandos.users.core.UserRepository
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse.notFound

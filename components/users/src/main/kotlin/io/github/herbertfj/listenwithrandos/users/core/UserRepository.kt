@@ -1,4 +1,4 @@
-package io.github.herbertfj.listenwithrandos.components.users
+package io.github.herbertfj.listenwithrandos.users.core
 
 import reactor.core.publisher.Mono
 

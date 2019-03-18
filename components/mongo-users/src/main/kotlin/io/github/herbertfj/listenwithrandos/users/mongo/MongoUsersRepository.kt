@@ -1,7 +1,7 @@
-package io.github.herbertfj.listenwithrandos.components.users.mongo
+package io.github.herbertfj.listenwithrandos.users.mongo
 
-import io.github.herbertfj.listenwithrandos.components.users.User
-import io.github.herbertfj.listenwithrandos.components.users.UserRepository
+import io.github.herbertfj.listenwithrandos.users.core.User
+import io.github.herbertfj.listenwithrandos.users.core.UserRepository
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate
 import org.springframework.data.mongodb.core.findById
 import org.springframework.data.mongodb.core.findOne

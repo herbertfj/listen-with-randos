@@ -1,7 +1,7 @@
 package io.github.herbertfj.listenwithrandos.chats.core
 
-import io.github.herbertfj.listenwithrandos.components.users.User
-import io.github.herbertfj.listenwithrandos.components.users.UserRepository
+import io.github.herbertfj.listenwithrandos.users.core.User
+import io.github.herbertfj.listenwithrandos.users.core.UserRepository
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito.given

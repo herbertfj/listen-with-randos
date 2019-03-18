@@ -1,6 +1,6 @@
 package io.github.herbertfj.listenwithrandos.chats.core
 
-import io.github.herbertfj.listenwithrandos.components.users.UserRepository
+import io.github.herbertfj.listenwithrandos.users.core.UserRepository
 import reactor.core.publisher.Mono
 import java.time.Instant
 

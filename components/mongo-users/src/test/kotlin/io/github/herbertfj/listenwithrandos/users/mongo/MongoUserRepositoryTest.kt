@@ -1,6 +1,6 @@
-package io.github.herbertfj.listenwithrandos.components.users.mongo
+package io.github.herbertfj.listenwithrandos.users.mongo
 
-import io.github.herbertfj.listenwithrandos.components.users.User
+import io.github.herbertfj.listenwithrandos.users.core.User
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
