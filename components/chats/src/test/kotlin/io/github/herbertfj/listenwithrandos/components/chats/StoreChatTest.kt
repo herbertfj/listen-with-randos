@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito.given
 import org.mockito.Mockito.mock
 import reactor.core.publisher.Mono.just
+import reactor.test.StepVerifier
 import java.time.Instant
 
 class StoreChatTest {
@@ -37,8 +38,10 @@ class StoreChatTest {
         given(userRepository.find(chatMessage.userId)).willReturn(just(user))
         given(chatRepository.add(chatToSave)).willReturn(just(expectedChat))
 
-        val storedChat = storeChat(chatMessage).block()
+        val storedChat = storeChat(chatMessage)
 
-        assertThat(storedChat).isEqualTo(expectedChat)
+        StepVerifier.create(storedChat)
+                .expectNext(expectedChat)
+                .verifyComplete()
     }
 }
