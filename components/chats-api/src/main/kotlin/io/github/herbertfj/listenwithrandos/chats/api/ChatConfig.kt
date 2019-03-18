@@ -1,4 +1,4 @@
-package io.github.herbertfj.listenwithrandos.api.chats
+package io.github.herbertfj.listenwithrandos.chats.api
 
 import io.github.herbertfj.listenwithrandos.components.chats.ChatRepository
 import io.github.herbertfj.listenwithrandos.components.chats.StoreChat

@@ -1,4 +1,4 @@
-package io.github.herbertfj.listenwithrandos.api.users
+package io.github.herbertfj.listenwithrandos.users.api
 
 import io.github.herbertfj.listenwithrandos.components.users.User
 import io.github.herbertfj.listenwithrandos.components.users.UserRepository

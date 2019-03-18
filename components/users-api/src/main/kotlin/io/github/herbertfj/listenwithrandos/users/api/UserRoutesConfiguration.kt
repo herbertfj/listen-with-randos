@@ -1,4 +1,4 @@
-package io.github.herbertfj.listenwithrandos.api.users
+package io.github.herbertfj.listenwithrandos.users.api
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

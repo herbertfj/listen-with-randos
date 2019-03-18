@@ -1,3 +1,3 @@
 dependencies {
-    implementation("io.projectreactor:reactor-core")
+    api("io.projectreactor:reactor-core")
 }

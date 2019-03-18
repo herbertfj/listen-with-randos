@@ -1,4 +1,4 @@
-package io.github.herbertfj.listenwithrandos.api.chats
+package io.github.herbertfj.listenwithrandos.chats.api
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

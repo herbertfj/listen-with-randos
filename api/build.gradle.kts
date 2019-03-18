@@ -20,16 +20,10 @@ tasks.withType<KotlinJvmCompile> {
 }
 
 dependencies {
-    implementation(project(":components:chats"))
-    implementation(project(":components:users"))
-
-    implementation(project(":components:mongo-chats"))
-    implementation(project(":components:mongo-users"))
+    implementation(project(":components:users-api"))
+    implementation(project(":components:chats-api"))
 
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
