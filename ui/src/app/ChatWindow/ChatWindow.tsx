@@ -29,9 +29,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
   sendChat,
   loadChats,
 }) => {
-  useEffect(() => {
-    loadChats()
-  }, [])
+  useEffect(() => loadChats(), [loadChats])
 
   const [newChat, setNewChat] = useState("")
 
