@@ -13,10 +13,10 @@ type ReceiveTokenDispatchProps = {
 
 type ReceiveTokenProps = RouteComponentProps & ReceiveTokenDispatchProps
 
-const ReceiveToken: React.FC<ReceiveTokenProps> = props => {
+const ReceiveToken: React.FC<ReceiveTokenProps> = ({location, keepToken}) => {
   useEffect(() => {
-    const hashParams = props.location.hash.substring(1)
-    props.keepToken(parse(hashParams).access_token)
+    const hashParams = location.hash.substring(1)
+    keepToken(parse(hashParams).access_token)
   }, [])
 
   return null

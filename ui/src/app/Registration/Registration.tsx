@@ -15,14 +15,12 @@ type RegistrationProps = RouteComponentProps<{}, StaticContext, User> &
 
 const Registration: React.FC<RegistrationProps> = props => {
   const user = props.location.state
+  const [displayName, setDisplayName] = useState(user.displayName)
 
   if (!props.location.state || !props.location.state.spotifyId) {
     props.history.replace("/")
-
     return null
   }
-
-  const [displayName, setDisplayName] = useState(user.displayName)
 
   function onInputChange(event: ChangeEvent<HTMLInputElement>) {
     setDisplayName(event.target.value)
